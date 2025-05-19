@@ -13,15 +13,11 @@ public class ScreenmatchApplication implements CommandLineRunner {
 		SpringApplication.run(ScreenmatchApplication.class, args);
 	}
 
-	//mi API KEY
+	//mi API KEY de OMDB
     //http://www.omdbapi.com/?t=matrix&apikey=464d1cb3
 
 	@Override
-	public void run(String... args) throws Exception {
-		//esto es por default pero no nos sirve ahorita
-		
-		//throw new UnsupportedOperationException("Unimplemented method 'run'");
-		
+	public void run(String... args) throws Exception {		
 		//aparece al principio
 		System.out.println("Hola mundo desde Spring");
 
@@ -29,8 +25,13 @@ public class ScreenmatchApplication implements CommandLineRunner {
 		//metodo de consumoAPI.java, espera una String
 		var json = consumoAPI.obtenerDatos("http://www.omdbapi.com/?t=game+of+thrones&apikey=464d1cb3");
 		//consultar otra API, imagen de cafe aleatoria, aunque ya no esta disopponible
-		//var json = consumoAPI.obtenerDatos("http://www.coffe.alexflipnote.dev/random.json");
+		//var json1 = consumoAPI.obtenerDatos("http://www.coffe.alexflipnote.dev/random.json");
 		System.out.println(json);
+		//System.out.println(json1);
+
 	}
+
+
+	
 
 }
