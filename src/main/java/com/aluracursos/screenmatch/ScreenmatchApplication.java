@@ -35,7 +35,7 @@ public class ScreenmatchApplication implements CommandLineRunner {
 		Principal principal = new Principal();
 		principal.muestraElMenu();
 
-	}		
+		
 
 		// var consumoAPI = new ConsumoAPI();
 		// //metodo de consumoAPI.java, espera una String
@@ -66,6 +66,8 @@ public class ScreenmatchApplication implements CommandLineRunner {
 		// }
 
 		// temporadas.forEach(System.out::println);
+
+	}
 
 	
 
