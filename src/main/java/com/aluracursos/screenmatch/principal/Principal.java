@@ -1,5 +1,7 @@
 package com.aluracursos.screenmatch.principal;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -102,6 +104,27 @@ public class Principal {
         .collect(Collectors.toList());
 
         episodios.forEach(System.out::println);
+
+
+        //busqueda de episodios a partir de x año
+
+        System.out.println("Indica desde que año dseas buscar los episodios");
+        var fecha = teclado.nextInt();
+        teclado.nextLine();
+
+        LocalDate fechaBusqueda = LocalDate.of(fecha, 1, 1);
+        //desde la fecha del usuario, del mes y dia 1
+
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        episodios.stream().filter(e -> e.getFechaDeLanzamiento() != null && e.getFechaDeLanzamiento().isAfter(fechaBusqueda)).forEach(e -> {
+            System.out.println(
+                "Temporada " + e.getTemporada() +
+                " Episodio " + e.getTitulo() +
+                " Fecha de Lanzamiento " + e.getFechaDeLanzamiento().format(dtf));
+            System.out.println("yuyuyu");
+        });
+        //.forEach(e -> {}) es para varias instrucciones
+        //puede ser (e -> System.out.println());
 
     }
 
