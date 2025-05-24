@@ -1,5 +1,8 @@
 package com.aluracursos.screenmatch;
 
+import java.util.ArrayList;
+import java.util.List;
+
 // import java.security.Principal;
 // import java.util.ArrayList;
 // import java.util.List;
@@ -8,6 +11,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import com.aluracursos.screenmatch.principal.EjemploStreams;
 import com.aluracursos.screenmatch.principal.Principal;
 
 // import com.aluracursos.screenmatch.model.DatosEpisodio;
@@ -32,8 +36,13 @@ public class ScreenmatchApplication implements CommandLineRunner {
 		// //aparece al principio
 		System.out.println("\n Hola mundo desde Spring \n");
 
-		Principal principal = new Principal();
-		principal.muestraElMenu();
+		//Principal principal = new Principal();
+		//principal.muestraElMenu();
+
+		EjemploStreams ejemploStreams = new EjemploStreams();
+		ejemploStreams.muestraEjemplo();
+
+
 
 		
 
@@ -68,9 +77,6 @@ public class ScreenmatchApplication implements CommandLineRunner {
 		// temporadas.forEach(System.out::println);
 
 	}
-
-	
-
 
 	
 
