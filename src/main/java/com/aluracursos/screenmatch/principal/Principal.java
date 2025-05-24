@@ -1,8 +1,11 @@
 package com.aluracursos.screenmatch.principal;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 import com.aluracursos.screenmatch.model.DatosEpisodio;
 import com.aluracursos.screenmatch.model.DatosSerie;
@@ -45,6 +48,7 @@ public class Principal {
 			temporadas.add(datosTemporadas);
 		}
 
+
 		//temporadas.forEach(System.out::println);
 
         //mostrar solo el titulo de los episodios para las temporadas
@@ -56,10 +60,26 @@ public class Principal {
         //     }
         // }
 
-        //expresion lamba
-        temporadas.forEach(t -> t.episodios().forEach(e -> System.out.println(e.titulo())));
+
+        //expresion lamba, menos lineas de codigo   
+
+        //temporadas.forEach(t -> t.episodios().forEach(e -> System.out.println(e.titulo())));
 
 
+        //convertir las informaciones a una lista de tipo: Datosepidsodio
+
+        List<DatosEpisodio> datosEpisodios = temporadas.stream().flatMap(t -> t.episodios().stream()).collect(Collectors.toList());
+        //collect es editable, to list no se edita
+        //List<DatosEpisodio> datosEpisodios = temporadas.stream().flatMap(t -> t.episodios().stream()).toList();
+
+
+        //top 5 episodios
+        System.out.println("Top 5 episodios");
+        datosEpisodios.stream()
+        .filter(e -> !e.evalucion().equalsIgnoreCase("N/A"))
+        .sorted(Comparator.comparing(DatosEpisodio::evalucion).reversed())
+        .limit(5)
+        .forEach(System.out::println);
 
     }
 

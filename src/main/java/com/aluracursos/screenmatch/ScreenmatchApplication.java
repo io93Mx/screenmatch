@@ -36,11 +36,13 @@ public class ScreenmatchApplication implements CommandLineRunner {
 		// //aparece al principio
 		System.out.println("\n Hola mundo desde Spring \n");
 
-		//Principal principal = new Principal();
-		//principal.muestraElMenu();
+		//muestra Principal.java
+		Principal principal = new Principal();
+		principal.muestraElMenu();
 
-		EjemploStreams ejemploStreams = new EjemploStreams();
-		ejemploStreams.muestraEjemplo();
+		//muestra EjemploStreams.java
+		//EjemploStreams ejemploStreams = new EjemploStreams();
+		//ejemploStreams.muestraEjemplo();
 
 
 
