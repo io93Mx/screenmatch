@@ -10,6 +10,7 @@ import java.util.stream.Collectors;
 import com.aluracursos.screenmatch.model.DatosEpisodio;
 import com.aluracursos.screenmatch.model.DatosSerie;
 import com.aluracursos.screenmatch.model.DatosTemporadas;
+import com.aluracursos.screenmatch.model.Episodio;
 import com.aluracursos.screenmatch.service.ConsumoAPI;
 import com.aluracursos.screenmatch.service.ConvierteDatos;
 
@@ -74,12 +75,33 @@ public class Principal {
 
 
         //top 5 episodios
-        System.out.println("Top 5 episodios");
+        System.out.println("Top 5 mejores episodios");
+
         datosEpisodios.stream()
         .filter(e -> !e.evalucion().equalsIgnoreCase("N/A"))
         .sorted(Comparator.comparing(DatosEpisodio::evalucion).reversed())
         .limit(5)
         .forEach(System.out::println);
+
+        //datosEpisodios.stream() permite aplicar operaciones funcionales
+        // .filter(e -> !e.evalucion().equalsIgnoreCase("N/A")) filtra todos los que sean diferentes a N/A
+        // .sorted(Comparator.comparing(DatosEpisodio::evalucion).reversed()) ordena los datosEpisodio por evalucion de menor a mayor, con reversed es de mayor a menor
+        // .limit(5) despues de ordenar, se limita a los primeros 5 elementos
+        // .forEach(System.out::println); imprime cada elemento, tambien es igual a
+        // x -> System.out.println(x); para cada X, imprime X
+        
+        //¿Es una lambda, .forEach(System.out::println); ?
+        //No exactamente, no es una lambda, pero es muy similar. Es una referencia a método (en inglés: method reference), que es una forma más concisa de escribir una lambda que simplemente llama a un método existente.
+
+
+        //convirtiendo los datos a una lista del tipo episodio
+
+        List<Episodio> episodios = temporadas.stream()
+        .flatMap(t -> t.episodios().stream()
+        .map(d -> new Episodio(t.numero(),d)))
+        .collect(Collectors.toList());
+
+        episodios.forEach(System.out::println);
 
     }
 
