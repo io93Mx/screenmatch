@@ -29,6 +29,7 @@ public class Principal {
     private ConvierteDatos conversor = new ConvierteDatos();
 
 
+
     public void muestraElMenu() {
 
         System.out.println("Escribe el nombre de la serie que desea buscar");
@@ -76,13 +77,18 @@ public class Principal {
         //List<DatosEpisodio> datosEpisodios = temporadas.stream().flatMap(t -> t.episodios().stream()).toList();
 
 
+
         //top 5 episodios
         System.out.println("Top 5 mejores episodios");
 
         datosEpisodios.stream()
         .filter(e -> !e.evalucion().equalsIgnoreCase("N/A"))
+        .peek(e -> System.out.println("Primer filtro (N/A)" + e))
         .sorted(Comparator.comparing(DatosEpisodio::evalucion).reversed())
+        .peek(e -> System.out.println("Segundo filtro de ordenacion (M>m)" + e))
+        .map(e -> e.titulo().toUpperCase())
         .limit(5)
+        .peek(e -> System.out.println("Tercer filtro mayusculas (m/M)" + e))
         .forEach(System.out::println);
 
         //datosEpisodios.stream() permite aplicar operaciones funcionales
@@ -96,6 +102,7 @@ public class Principal {
         //No exactamente, no es una lambda, pero es muy similar. Es una referencia a método (en inglés: method reference), que es una forma más concisa de escribir una lambda que simplemente llama a un método existente.
 
 
+
         //convirtiendo los datos a una lista del tipo episodio
 
         List<Episodio> episodios = temporadas.stream()
@@ -103,7 +110,7 @@ public class Principal {
         .map(d -> new Episodio(t.numero(),d)))
         .collect(Collectors.toList());
 
-        episodios.forEach(System.out::println);
+        ////episodios.forEach(System.out::println);
 
 
         //busqueda de episodios a partir de x año
@@ -116,15 +123,17 @@ public class Principal {
         //desde la fecha del usuario, del mes y dia 1
 
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        episodios.stream().filter(e -> e.getFechaDeLanzamiento() != null && e.getFechaDeLanzamiento().isAfter(fechaBusqueda)).forEach(e -> {
-            System.out.println(
-                "Temporada " + e.getTemporada() +
-                " Episodio " + e.getTitulo() +
-                " Fecha de Lanzamiento " + e.getFechaDeLanzamiento().format(dtf));
-            System.out.println("yuyuyu");
-        });
-        //.forEach(e -> {}) es para varias instrucciones
-        //puede ser (e -> System.out.println());
+
+        // episodios.stream()
+        // .filter(e -> e.getFechaDeLanzamiento() != null && e.getFechaDeLanzamiento().isAfter(fechaBusqueda)).forEach(e -> {
+        //     System.out.println(
+        //         "Temporada " + e.getTemporada() +
+        //         " Episodio " + e.getTitulo() +
+        //         " Fecha de Lanzamiento " + e.getFechaDeLanzamiento().format(dtf));
+        //     System.out.println("yuyuyu");
+        // });
+        // //.forEach(e -> {}) es para varias instrucciones
+        // //puede ser (e -> System.out.println());
 
     }
 
